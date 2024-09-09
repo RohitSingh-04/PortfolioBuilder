@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+{% block page_heads %}
+<title>{{ data_type }}</title>
+{% endblock page_heads %}
+
+{% block page_bodys %}
+
+<div class="container mx-auto px-4 py-8">
+    
+    <div class="flex flex-wrap justify-center gap-8">
+        {% if show_resume %}
+        <!-- Create Resume Card -->
+        <a href="/create-resume" class="card bg-gradient-to-r from-green-400 to-green-600 text-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl w-full sm:w-80 md:w-96">
+            <div class="flex items-center justify-center h-48">
+                <img src="https://via.placeholder.com/200" alt="Create Resume" class="object-cover w-full h-full">
+            </div>
+            <div class="p-4 text-center">
+                <h2 class="text-xl font-bold">Create Resume</h2>
+            </div>
+        </a>
+        {% endif %}
+        {% if show_portfolio %}
+        
+        <!-- Create Portfolio Card -->
+        <a href="/create-portfolio" class="card bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl w-full sm:w-80 md:w-96">
+            <div class="flex items-center justify-center h-48">
+                <img src="https://via.placeholder.com/200" alt="Create Portfolio" class="object-cover w-full h-full">
+            </div>
+            <div class="p-4 text-center">
+                <h2 class="text-xl font-bold">Create Portfolio</h2>
+            </div>
+        </a>
+            
+        {% endif %}
+    </div>
+</div>
+   
+<hr class="mx-4">
+
+<div class="w-full max-w-screen-lg bg-gray-800 text-gray-200 text-center mx-auto rounded-lg shadow-lg">
+    <p class="text-lg font-semibold">{{ request.user.first_name }} here are your {{ data_type }}</p>
+</div>
+
+<div class="container mx-auto px-4 py-6">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <!-- Card 1 -->
+        <a href="/route1" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+            <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
+            <div class="p-4">
+                <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">Card Title 1</h2>
+                <p class="text-gray-600">This is a brief description of the first card. Click to explore more.</p>
+            </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="/route2" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+            <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
+            <div class="p-4">
+                <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">Card Title 2</h2>
+                <p class="text-gray-600">This is a brief description of the second card. Click to explore more.</p>
+            </div>
+        </a>
+
+        <!-- Add more cards here -->
+
+
+
+
+        
+
+    </div>
+</div>
+
+{% endblock page_bodys %}

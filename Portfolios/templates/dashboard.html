@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block page_heads %}
+    <title>Home</title>
+    <style>
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+{% endblock page_heads %}
+
+{% block page_bodys %}
+    <h1 class="text-2xl font-medium text-white my-4 ms-5 cursor-default">Welcome <strong class="hover:text-green-600 text-3xl">{{ request.user.first_name }} {{ request.user.last_name }}'s</strong> to your Dashboard</h1>
+
+    <hr class="mx-5 bg-green-500 hover:bg-white hover:border-white rounded-xl h-1 border-green-500">
+    
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+            <!-- Document Card -->
+            <a href="/documents" class="card bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl w-full sm:w-80 md:w-96 lg:w-1/4">
+                <div class="flex items-center justify-center h-40">
+                    <img src="https://via.placeholder.com/150" alt="Document" class="object-cover w-full h-full">
+                </div>
+                <div class="p-4 text-center">
+                    <h2 class="text-xl font-bold">My Document</h2>
+                </div>
+            </a>
+            <!-- Resume Card -->
+            <a href="/myresume" class="card bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl w-full sm:w-80 md:w-96 lg:w-1/4">
+                <div class="flex items-center justify-center h-40">
+                    <img src="https://via.placeholder.com/150" alt="Resume" class="object-cover w-full h-full">
+                </div>
+                <div class="p-4 text-center">
+                    <h2 class="text-xl font-bold">My Resume</h2>
+                </div>
+            </a>
+            <!-- Portfolio Card -->
+            <a href="/myportfs" class="card bg-gradient-to-r from-green-500 to-yellow-500 text-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl w-full sm:w-80 md:w-96 lg:w-1/4">
+                <div class="flex items-center justify-center h-40">
+                    <img src="https://via.placeholder.com/150" alt="Portfolio" class="object-cover w-full h-full">
+                </div>
+                <div class="p-4 text-center">
+                    <h2 class="text-xl font-bold">My Portfolio</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+
+{% endblock page_bodys  %}
