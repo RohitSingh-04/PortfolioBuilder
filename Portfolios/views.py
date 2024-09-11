@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from register.models import UserResumeDetails
+from django.http import HttpResponseBadRequest
+from register.models import *
 
 # Create your views here.
 def home(request):
@@ -26,11 +29,27 @@ def logout_fx(request):
     return redirect('/login/')
 
 def fetch_docs(request):
-
     return render(request, 'listdocs.html', {"data_type": "Documents", "show_resume": True, "show_portfolio":True})
 
 def fetch_resume(request):
-    return render(request, 'listdocs.html', {"data_type": "Resumes", "show_resume": True, "show_portfolio":False})
+    
+    resultSet = UserResumeDetails.objects.filter(user = request.user).all()
+
+    return render(request, 'listdocs.html', {"data_type": "Resumes", "show_resume": True, "show_portfolio":False, "resultset":resultSet})
 
 def fetch_portfolios(request):
     return render(request, 'listdocs.html', {"data_type": "Portfolios", "show_resume": False, "show_portfolio":True})
+
+def show_resume(request, id):
+
+    if request.method == "GET":
+
+        userdetail = UserResumeDetails.objects.filter(id = id, user = request.user).first()
+
+        ##for template 1
+        if userdetail.template.id == 1:
+            if userdetail:
+                return render(request, 'template1.html', {'userdetail': userdetail})
+            
+    else:
+        return HttpResponseBadRequest()

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     {% block page_heads %}
         
     {% endblock page_heads %}
-    <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 <body class="bg-zinc-700">
@@ -35,7 +35,7 @@
             <div id="popover" class="absolute right-0 mt-2 bg-white border border-gray-200 shadow-lg rounded-md w-48 z-10 hidden">
                 <div class="p-4 text-gray-700">
                     <p class="text-lg font-semibold">{{ request.user.username }}</p>
-                    <a id="logoutButton" class="bg-red-700 hover:bg-red-400 py-2 text-left px-1 rounded-full text-center text-white ">Logout</a>
+                    <a id="logoutButton" class="bg-red-700 hover:bg-red-400 py-2 text-left px-1 rounded-full text-center text-white" href="/logout/">Logout</a>
                 </div>
             </div>
             {% else %}
@@ -68,7 +68,7 @@
 
 
 </header>
-<main class="text-white">
+<main>
 
     {% block page_bodys %}
     
@@ -101,14 +101,14 @@
             
             let isPopoverOpen = false;
             
-            {% if  request.user.is_authenticated%}
+           // {% if  request.user.is_authenticated%}
         
             userIconButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 isPopoverOpen = !isPopoverOpen;
                 popover.classList.toggle('hidden', !isPopoverOpen);
             });
-    {% endif %}
+    //{% endif %}
             document.addEventListener('click', (e) => {
                 if (!popover.contains(e.target) && e.target !== userIconButton) {
                     isPopoverOpen = false;

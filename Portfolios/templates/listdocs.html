@@ -43,34 +43,20 @@
     <p class="text-lg font-semibold">{{ request.user.first_name }} here are your {{ data_type }}</p>
 </div>
 
-<div class="container mx-auto px-4 py-6">
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <!-- Card 1 -->
-        <a href="/route1" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-            <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
-            <div class="p-4">
-                <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">Card Title 1</h2>
-                <p class="text-gray-600">This is a brief description of the first card. Click to explore more.</p>
-            </div>
-        </a>
 
-        <!-- Card 2 -->
-        <a href="/route2" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-            <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
-            <div class="p-4">
-                <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">Card Title 2</h2>
-                <p class="text-gray-600">This is a brief description of the second card. Click to explore more.</p>
-            </div>
-        </a>
+{% for obj in resultset %}
 
-        <!-- Add more cards here -->
-
-
-
-
-        
-
+    <div class="container mx-auto px-4 py-6">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <!-- Card 1 -->
+            <a href="{% if data_type == 'Resumes' %}/show/{{ obj.id }}{% else %}/route2{% endif %}" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">{% if data_type == 'Resumes' %}{{ obj.name }}{% else %}   {% endif %}</h2>
+                    <p class="text-gray-600">{% if data_type == 'Resumes' %}Created on - {{ obj.created_at }} and last Updated on - {{ obj.updated_at }}{% else %}    {% endif %}</p>
+                </div>
+            </a>
+        </div>
     </div>
-</div>
-
+{% endfor %}
 {% endblock page_bodys %}
