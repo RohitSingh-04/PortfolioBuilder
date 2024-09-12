@@ -44,12 +44,17 @@ def show_resume(request, id):
 
     if request.method == "GET":
 
-        userdetail = UserResumeDetails.objects.filter(id = id, user = request.user).first()
+        userdetail = UserResumeDetails.objects.filter(id = id).first()
+        if userdetail.is_global or userdetail.user == request.user:
 
-        ##for template 1
-        if userdetail.template.id == 1:
-            if userdetail:
-                return render(request, 'template1.html', {'userdetail': userdetail})
+            ##for template 1
+            if userdetail.template.id == 1:
+                if userdetail:
+                    return render(request, 'template1.html', {'userdetail': userdetail})
+                
+        else:
+            #not authorized
+            ...
             
     else:
         return HttpResponseBadRequest()

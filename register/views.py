@@ -37,5 +37,8 @@ def UserExists(request):
         
     return HttpResponseForbidden()
     
+
+def createResume(request):
+    ...
     
     
