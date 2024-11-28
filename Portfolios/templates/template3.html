@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block page_heads %}
+  <title>Resume</title>
+  <style differ>
+    body {
+            background: rgb(204, 204, 204);
+        }
+    
+        page {
+            background: white;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+        }
+    @media screen {
+      .a4 {
+        width: 210mm; /* A4 width */
+        height: 297mm; /* A4 height */
+        margin: auto;
+        background-color: white;
+        padding: 10mm; /* Reduced padding */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+      }
+    }
+    @media print {
+      body {
+        margin: 0;
+      }
+      .a4 {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
+{% endblock page_heads %}
+
+
+{% block page_bodys %}
+    
+<page class="a4">
+    <!-- Header Section -->
+    <header class="text-center mb-4">
+        <h1 class="text-2xl font-bold text-gray-800">{{ userdetail.first_name }} {{ userdetail.last_name }}</h1>
+        <p class="text-gray-600 text-xs">{% for skill in userdetail.skill_id.all %}
+             {{ skill }}&nbsp;|&nbsp;
+        {% endfor %}</p>
+        <p class="text-gray-600 text-xs">Email: {{ userdetail.email }} | Phone: {{ userdetail.phone }}</p>
+        {% if userdetail.social.exists %}
+
+        <div class="flex justify-center mt-1">
+            {% for social in userdetail.social.all %}
+            <a href="{{ social.url }}" class="text-blue-500 hover:underline mx-1 text-xs">{{ social.name }}</a>
+            {% endfor %}
+        </div>
+        
+        {% endif %}
+        
+    </header>
+    
+    <!-- Profile Summary -->
+    <section class="mb-4">
+        <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Profile Summary</h2>
+        <p class="text-gray-700 text-xs">
+            {{ userdetail.summary }}
+        </p>
+    </section>
+    
+    <!-- Skills Section -->
+    <section class="mb-4">
+        <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Skills</h2>
+        <ul class="grid grid-cols-2 gap-1 text-gray-700 text-xs">
+            {% for skill in userdetail.skill_id.all %}
+                
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+    <!-- Experience Section -->
+<section class="mb-4">
+    <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Experience</h2>
+    {% if userdetail.experience.all %}
+        {% for experience in userdetail.experience.all %}
+        <div class="mb-2">
+            <!-- Job Title and Organization -->
+            <h3 class="text-sm font-semibold text-gray-700">{{ experience.title }}</h3>
+            <p class="text-gray-600 text-xs">
+                {{ experience.org }}
+                {% if experience.location %}, {{ experience.location }}{% endif %}
+                | {{ experience.start_date|date:"M Y" }} -
+                {% if experience.is_current %}
+                    Present
+                {% else %}
+                    {{ experience.end_date|date:"M Y" }}
+                {% endif %}
+            </p>
+            <!-- Responsibilities as a List -->
+            {% if experience.description %}
+                <ul class="list-disc ml-4 mt-1 text-gray-700 text-xs">
+                    {% for responsibility in experience.description.splitlines %}
+                        <li>{{ responsibility }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% endif %}
+</section>
+
+    <!-- Projects Section -->
+<section class="mb-4">
+    <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Projects</h2>
+    {% if userdetail.project.all %}
+        {% for project in userdetail.project.all %}
+        <div class="mb-2">
+            <!-- Project Title -->
+            <h3 class="text-sm font-semibold text-gray-700">{{ project.title }}</h3>
+            <!-- Project Description -->
+            <p class="text-gray-600 text-xs">{{ project.desc }}</p>
+            <!-- Project Timeline -->
+            <p class="text-gray-600 text-xs">
+                {{ project.start_date|date:"M Y" }} - {{ project.end_date|date:"M Y" }}
+            </p>
+            <!-- Project Link -->
+            {% if project.link %}
+                <a href="{{ project.link }}" class="text-blue-500 text-xs underline" target="_blank">View Project</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% endif %}
+</section>
+
+    
+    <!-- Certifications Section -->
+<!-- Certifications Section -->
+<section class="mb-4">
+    <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Certifications</h2>
+    {% if userdetail.certification.all %}
+        <ul class="list-disc ml-4 text-gray-700 text-xs">
+            {% for certification in userdetail.certification.all %}
+                <li>
+                    <span class="font-semibold">{{ certification.title }}</span> 
+                    – {{ certification.institute }}
+                    <span class="text-gray-600">({{ certification.start_date|date:"M Y" }} - {{ certification.end_date|date:"M Y" }})</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</section>
+
+    
+    <!-- Education Section -->
+<!-- Education Section -->
+<section class="mb-4">
+    <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Education</h2>
+    {% if userdetail.education.all %}
+        {% for education in userdetail.education.all %}
+        <div class="mb-2">
+            <!-- Degree Title -->
+            <h3 class="text-sm font-semibold text-gray-700">{{ education.title }}</h3>
+            <!-- Institute and Timeline -->
+            <p class="text-gray-600 text-xs">{{ education.institute }} | {{ education.start_date|date:"Y" }} - {{ education.end_date|date:"Y" }}</p>
+        </div>
+        {% endfor %}
+    {% endif %}
+</section>
+
+</page>
+{% endblock page_bodys %}

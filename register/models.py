@@ -47,10 +47,14 @@ class Certification(models.Model):
         return self.title+"-"+self.institute+"-"+f"{self.start_date}"+f"{self.end_date}"
 
 class Experience(models.Model):
-    title = models.TextField(null = False)
+    title = models.TextField(null=False)
     org = models.TextField(null=False)
+    location = models.CharField(max_length=100, blank=True)
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
+    is_current = models.BooleanField(default=False)
+    description = models.TextField(null = False, blank=False)  # Combine responsibilities into a single field
+
 
     class Meta:
         unique_together = ('title', 'org', 'start_date', 'end_date')
@@ -105,6 +109,11 @@ class ColourScheme(models.Model):
     color = models.TextField()
     def __str__(self):
         return self.color
+class SocialMedia(models.Model):
+    name = models.TextField()
+    url = models.URLField(blank = False, unique = True)
+    def __str__(self):
+        return self.name
 
 class UserResumeDetails(models.Model):
     name = models.TextField(default="resume")
@@ -129,5 +138,6 @@ class UserResumeDetails(models.Model):
     strength = models.ManyToManyField(Strength)
     colorscheme = models.ForeignKey(ColourScheme, on_delete=models.SET_DEFAULT, default=1)
     template = models.ForeignKey(Template, on_delete=models.SET_DEFAULT, default=1)
-
+    portfolio = models.URLField(null=True, blank=True)
+    social = models.ManyToManyField(SocialMedia)
 

@@ -30,6 +30,7 @@ def logout_fx(request):
 
 def fetch_docs(request):
     return render(request, 'listdocs.html', {"data_type": "Documents", "show_resume": True, "show_portfolio":True})
+    # to add logic for all the documents
 
 def fetch_resume(request):
     
@@ -51,6 +52,9 @@ def show_resume(request, id):
             if userdetail.template.id == 1:
                 if userdetail:
                     return render(request, 'template1.html', {'userdetail': userdetail})
+            if userdetail.template.id == 2:
+                if userdetail:
+                    return render(request, 'template3.html', {'userdetail': userdetail})
                 
         else:
             #not authorized
