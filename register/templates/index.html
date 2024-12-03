@@ -23,39 +23,38 @@
         <h3 id="hd" class="text-3xl font-semibold mb-6 text-center text-gray-100">Information</h3>
         <!-- <div class="card max-w-3xl w-full p-6 bg-silver-200 rounded-lg shadow-lg">
         <h3 id="hd" class="text-3xl font-semibold mb-6 text-center text-gray-800">XYZ</h3> -->
+
         <form id="form" class="space-y-6" action="" method="post">
             <!-- Step 1 -->
             <div class="step">
-                <label for="fName" class="block text-white">First Name</label>
+                <label for="fName" class="block text-white">First Name*</label>
                 <input type="text" name="fName" id="fName" maxlength="20" required
                     class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
 
-                <label for="lName" class="block mt-4 text-white">Last Name</label>
+                <label for="lName" class="block mt-4 text-white">Last Name*</label>
                 <input type="text" name="lName" id="lName" maxlength="20" required
                     class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
             </div>
 
             <!-- Step 2 -->
             <div class="step">
-                <label for="email" class="block text-white">Email</label>
+                <label for="email" class="block text-white">Email*</label>
                 <input type="text" name="email" id="email" placeholder="abc123@xyz.com" required
                     class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
 
-                <label for="phone" class="block mt-4 text-white">Phone no.</label>
+                <label for="phone" class="block mt-4 text-white">Phone no.*</label>
                 <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" maxlength="10" required
                     class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
 
 
-                <label for="address" class="block mt-4 text-white">Address</label>
+                <label for="address" class="block mt-4 text-white">Address*</label>
                 <div class="flex space-x-2">
-                    <input type="text" name="address" id="address" placeholder="HouseNo/Building/Village/City" required
+                    <input type="text" name="address" id="address" placeholder="Address" required
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                     <input type="text" name="state" id="state" placeholder="State" required
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                 </div>
                 <div class="flex space-x-2 mt-2">
-                    <input type="text" name="country" id="country" placeholder="Country" required
-                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                     <input type="text" name="zip" id="zip" placeholder="Zip Code" required
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                 </div>
@@ -64,8 +63,8 @@
             <!-- Step 3 -->
             <div class="step">
                 <label for="image" class="block text-white">Insert your Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required
-                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+                <input type="file" id="image" name="image" accept="image/*"
+                    class=" border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
 
                 <label for="textarea" class="block mt-4 text-white">Summary (max 300 characters):</label>
                 <textarea id="textarea" cols="20" rows="5" name="textarea" maxlength="300"
@@ -74,7 +73,7 @@
 
             <!-- Step 4 -->
             <div class="step">
-                <label for="education" class="block text-white">Education</label>
+                <label for="education" class="block text-white">Education*</label>
                 <div class="flex space-x-2">
                     <input type="text" name="eTitle1" id="eTitle1" placeholder="Title" required
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
@@ -89,19 +88,21 @@
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                 </div>
                 <!-- Optional education -->
-                <div class="mt-4">
+
+                <div class="flex space-x-2 mt-4">
                     <input type="text" name="eTitle2" id="eTitle2" placeholder="Title"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
                     <input type="text" name="eInstitute2" id="eInstitute2" placeholder="Institute"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
-                    <div class="flex space-x-2 mt-2">
-                        <label for="ed2" class="block text-white">Duration:</label>
-                        <input type="date" name="esd2" id="esd2"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
-                        <input type="date" name="eed2" id="eed2"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
-                    </div>
                 </div>
+                <div class="flex space-x-2 mt-2">
+                    <label for="ed2" class="block text-white">Duration:</label>
+                    <input type="date" name="esd2" id="esd2"
+                        class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                    <input type="date" name="eed2" id="eed2"
+                        class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                </div>
+
             </div>
 
             <!-- Step 5 -->
@@ -139,6 +140,13 @@
                     </div>
                     <input type="text" name="pDescription1" id="pDescription1" placeholder="Description"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+                    <div class="flex space-x-2 mt-2">
+                        <label for="pro" class="block text-white">Duration:</label>
+                        <input type="date" name="psd1" id="psd1"
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                        <input type="date" name="ped1" id="ped1"
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                    </div>
 
                     <div class="flex space-x-2">
                         <input type="text" name="pName2" id="pName2" placeholder="Name"
@@ -148,7 +156,13 @@
                     </div>
                     <input type="text" name="pDescription2" id="pDescription2" placeholder="Description"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
-
+                    <div class="flex space-x-2 mt-2">
+                        <label for="pro2" class="block text-white">Duration:</label>
+                        <input type="date" name="psd2" id="psd2"
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                        <input type="date" name="ped2" id="ped2"
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                    </div>
                     <label for="miniProject" class="block mt-4 text-white">Mini Project</label>
                     <div class="space-y-4">
                         <div class="flex space-x-2">
@@ -157,8 +171,13 @@
                             <input type="url" name="mpLink1" id="mpLink1" placeholder="https://example.com"
                                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                         </div>
-                        <input type="text" name="mpDescription1" id="mpDescription1" placeholder="Description"
-                            class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+                        <div class="flex space-x-2 mt-2">
+                            <label for="mpro" class="block text-white">Duration:</label>
+                            <input type="date" name="mpsd1" id="mpsd1"
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                            <input type="date" name="mped1" id="mped1"
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                        </div>
 
                         <div class="flex space-x-2">
                             <input type="text" name="mpName2" id="mpName2" placeholder="Name"
@@ -166,8 +185,13 @@
                             <input type="url" name="mpLink2" id="mpLink2" placeholder="https://example.com"
                                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                         </div>
-                        <input type="text" name="mpDescription2" id="mpDescription2" placeholder="Description"
-                            class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+                        <div class="flex space-x-2 mt-2">
+                            <label for="mpro2" class="block text-white">Duration:</label>
+                            <input type="date" name="mpsd2" id="mpsd2"
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                            <input type="date" name="mped2" id="mped2"
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -225,36 +249,101 @@
                     <div>
                         <input type="text" name="exTitle1" id="exTitle1" placeholder="Title/Job Role"
                             class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+
+                        <input type="text" name="exOrganisation" id="exOrganisation" placeholder="Organisation"
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+
+                        <input type="text" name="exDescription" id="exDescription" placeholder="Description"
+                            class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+
+                        <input type="text" name="location" placeholder="Location"
+                            class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+
                         <div class="dates">
                             <label for="exd1" class="block text-white">Duration:</label>
                             <input type="date" name="exsd1" id="exsd1"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                             <input type="date" name="exed1" id="exed1"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                         </div>
                     </div>
                     <div class="mt-4">
                         <input type="text" name="exTitle2" id="exTitle2" placeholder="Title"
                             class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+
+                        <input type="text" name="exOrganisation" id="exOrganisation" placeholder="Organisation"
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+
+                        <input type="text" name="exDescription" id="exDescription" placeholder="Description"
+                            class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+
+                        <input type="text" name="location" placeholder="Location"
+                            class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900" />
+
                         <div class="dates">
                             <label for="exd2" class="block text-white">Duration:</label>
                             <input type="date" name="exsd2" id="exsd2"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                             <input type="date" name="exed2" id="exed2"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+                                class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 10 (Last Step) -->
-            <!-- <div class="step"> -->
-            <!-- <label for="language" class="block text-white">Language</label> -->
-            <!-- You can add fields for Language here if needed -->
-            <!-- </div> -->
+            <!-- Step 10-->
+            <div class="step">
+                <h1 class="text-white"> Choose Template</h1>
+
+                <input type="radio" name="template" value="1" class="required" />Template 1 <br>
+
+                <input type="radio" name="template" value="2" class="required" />Template 2 <br>
+
+                <input type="radio" name="template" value="3" class="required" />Template 3 <br>
+
+                <input type="radio" name="template" value="4" class="required" />Template 4 <br>
+            </div>
+
+            <!-- Step 11-->
+            <div class="step">
+                <label class="mr-2 " for="url" class="block text-white">Protfolio Link</label>
+                <input class="rounded-sm border p-1 " type="url" name="portfolioLink" id="portfolioLink"
+                    placeholder="https://example.com"
+                    class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" />
+            </div>
+
+            <!-- Step 12-->
+            <div class="step">
+                <label for="" class="block text-white">Social Media</label>
+                <input type="text" name="platformName1" placeholder="platform name (eg. Linkedin, Facebook, Github)"
+                    class="border px-3 py-2 mt-2 rounded flex-1 border-gray-300 text-gray-900" />
+                <input type="url" name="socialURL1" placeholder="https://example.com"
+                    class="border px-3 py-2 mt-2 rounded flex-1 border-gray-300 text-gray-900" />
+                <br>
+                <input type="text" name="platformName2"
+                    class="border px-3 py-2 mt-2 rounded flex-1 border-gray-300 text-gray-900"
+                    placeholder="platform name (eg. Linkedin, Facebook, Github)" />
+                <input type="url" name="socialURL2"
+                    class="border px-3 py-2 mt-2 rounded flex-1 border-gray-300 text-gray-900"
+                    placeholder="https://example.com" />
+                <br>
+                <input type="text" name="platformName3"
+                    class="border px-3 py-2 mt-2 rounded flex-1 border-gray-300 text-gray-900"
+                    placeholder="platform name (eg. Linkedin, Facebook, Github)" />
+                <input type="url" name="socialURL3"
+                    class="border px-3 py-2 mt-2 rounded flex-1 border-gray-300 text-gray-900"
+                    placeholder="https://example.com" />
+            </div>
+
+            <!-- Step 13-->
+            <div class="step">
+                <input type="checkbox" name="isGlobal" id="" />
+                Want to show it global ?
+            </div>
 
             <br />
             <!-- Buttons -->
+
             <div class="flex justify-between mt-6">
                 <button type="button" id="previous"
                     class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 rounded-full">Previous</button>
