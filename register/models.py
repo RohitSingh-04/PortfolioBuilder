@@ -93,6 +93,7 @@ class Address(models.Model):
 
 class Template(models.Model):
     template = models.TextField()
+    template_html = models.TextField(unique=True, blank=False, null=False)
     def __str__(self):
         return self.template
 

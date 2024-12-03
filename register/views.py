@@ -12,7 +12,6 @@ def createResume(request):
         return render(request, 'resume_form.html', context = {"resume_templates": Template.objects.all()})
 
     elif request.method == "POST":
-        print(request.POST)
         f_name = request.POST.get('fName')
         l_name = request.POST.get('lName')
         email = request.POST.get('email')
