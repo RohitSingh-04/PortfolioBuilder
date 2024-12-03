@@ -109,7 +109,10 @@
                 </div>
                 <div class="flex tracking-tighter poppins-semibold text-xs">
                     <h3 class="w-1/2 inline">{{ userdetail.address.line1 }},&nbsp;{{ userdetail.address.state.state }}&nbsp;({{ userdetail.address.pin_code}})</h3>
-                    <h3 class="w-1/2 inline"><a href="www.google.com">xhubham sinxh rawxt</a></h3>
+                    {% if userdetail.portfolio %}
+                    <h3 class="w-1/2 inline"><a href="{{ userdetail.portfolio }}">{{ userdetail.fname }}'s Portfolio</a></h3>
+                        
+                    {% endif %}
                 </div>
             </div>
             <div class="image-container flex-none ml-10">

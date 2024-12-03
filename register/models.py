@@ -4,12 +4,6 @@ from django.core.files.storage import FileSystemStorage
 
 fs = FileSystemStorage()
 # Create your models here.
-class Language(models.Model):
-    language = models.CharField(max_length=20, unique = True)
-
-    def __str__(self):
-        return self.language
-
 class Strength(models.Model):
     strength = models.CharField(max_length=20, unique=True)
 
@@ -91,11 +85,8 @@ class State(models.Model):
 
 class Address(models.Model):
     line1 = models.TextField()
-    state = models.OneToOneField(State, null=True,on_delete=models.SET_NULL)
+    state = models.ForeignKey(State, null=True,on_delete=models.SET_NULL)
     pin_code = models.PositiveIntegerField()
-
-    class Meta:
-        unique_together = ('line1', 'state', 'pin_code')
     
     def __str__(self):
         return self.line1+self.state.state+str(self.pin_code)
@@ -105,10 +96,6 @@ class Template(models.Model):
     def __str__(self):
         return self.template
 
-class ColourScheme(models.Model):
-    color = models.TextField()
-    def __str__(self):
-        return self.color
 class SocialMedia(models.Model):
     name = models.TextField()
     url = models.URLField(blank = False, unique = True)
@@ -125,8 +112,7 @@ class UserResumeDetails(models.Model):
     summary = models.TextField(max_length=500)
     is_global = models.BooleanField(default=False)
     skill_id = models.ManyToManyField(Skills)
-    Language = models.ManyToManyField(Language)
-    image = models.ImageField(upload_to='images/', storage=fs)
+    image = models.ImageField(blank=True, null=True, upload_to='images/', storage=fs)
     email = models.EmailField()
     phone = models.PositiveBigIntegerField()
     education = models.ManyToManyField(Education)
@@ -136,7 +122,6 @@ class UserResumeDetails(models.Model):
     miniproject = models.ManyToManyField(MiniProjects)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
     strength = models.ManyToManyField(Strength)
-    colorscheme = models.ForeignKey(ColourScheme, on_delete=models.SET_DEFAULT, default=1)
     template = models.ForeignKey(Template, on_delete=models.SET_DEFAULT, default=1)
     portfolio = models.URLField(null=True, blank=True)
     social = models.ManyToManyField(SocialMedia)
