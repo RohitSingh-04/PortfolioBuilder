@@ -1,123 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume - Estelle Darcy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-10">
-    <div class="max-w-4xl mx-auto bg-white shadow-lg flex flex-col lg:flex-row">
-        <!-- Left Section -->
-        <div class="lg:w-1/3 p-6 bg-gray-200">
-            <div class="flex justify-center mb-6">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0rzLl4hpIs3ClpTfjyMu21kXtxFFLXUE7Rg&s" alt="Estelle Darcy" class="rounded-full w-48 h-48 object-cover">
-            </div>
-            <h2 class="text-2xl font-bold text-center">ESTELLE DARCY</h2>
-            <p class="text-center text-gray-700">Fashion Designer</p>
-            <p class="text-center mt-4 text-gray-600">Fashion designer with 6 years of experience in designing clothes for women, men, and children, with a focus on forecasting trends.</p>
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold">Education</h3>
-                <ul class="mt-2 space-y-2">
-                    <li>
-                        <p class="text-gray-800 font-bold">2014 - 2015 :</p>
-                        <p class="text-gray-600">Shodwe Certified Academy - Fashion Design</p>
-                    </li>
-                    <li>
-                        <p class="text-gray-800 font-bold">2015 - 2018 :</p>
-                        <p class="text-gray-600">Larana University - Bachelor Degree of Fashion Design</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold">Award</h3>
-                <p class="mt-2 text-gray-600">2019 : Best Fashion Designer by Salford Magazine</p>
-            </div>
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold">Skills</h3>
-                <ul class="mt-2 space-y-2">
-                    <li>
-                        <p class="flex justify-between">
-                            <span>Fashion Illustration</span>
-                            <span>85%</span>
-                        </p>
-                        <div class="w-full bg-gray-300 h-2 rounded-full">
-                            <div class="bg-brown-500 h-2 rounded-full" style="width: 85%;"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <p class="flex justify-between">
-                            <span>Drawing Sketch</span>
-                            <span>80%</span>
-                        </p>
-                        <div class="w-full bg-gray-300 h-2 rounded-full">
-                            <div class="bg-brown-500 h-2 rounded-full" style="width: 80%;"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <p class="flex justify-between">
-                            <span>Digital Fashion Drawing</span>
-                            <span>75%</span>
-                        </p>
-                        <div class="w-full bg-gray-300 h-2 rounded-full">
-                            <div class="bg-brown-500 h-2 rounded-full" style="width: 75%;"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <p class="flex justify-between">
-                            <span>Trend Forecasting</span>
-                            <span>75%</span>
-                        </p>
-                        <div class="w-full bg-gray-300 h-2 rounded-full">
-                            <div class="bg-brown-500 h-2 rounded-full" style="width: 75%;"></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+{% extends 'template_template.html' %}
 
-        <!-- Right Section -->
-        <div class="lg:w-2/3 p-6">
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold">Experience</h3>
-                <ul class="mt-4 space-y-6">
-                    <li>
-                        <p class="text-gray-800 font-bold">2018 - 2019 :</p>
-                        <p class="text-gray-600">Freelance Fashion Designer</p>
-                        <ul class="mt-2 text-gray-600 list-disc list-inside">
-                            <li>Drawing and Sketching idea or concept of clothing to client's request.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <p class="text-gray-800 font-bold">2019 - present :</p>
-                        <p class="text-gray-600">Liceria Company - Fashion Designer</p>
-                        <ul class="mt-2 text-gray-600 list-disc list-inside">
-                            <li>Drawing and sketching clothes, accessories, or shoes for consumer and retail companies.</li>
-                            <li>Forecasting what will be popular with consumers in one year ahead.</li>
-                            <li>Managing team to apply fashion sketch to assemble clothes and its accessories.</li>
-                            <li>Collaborating with the wider development team and buyers to develop products.</li>
-                        </ul>
-                    </li>
-                </ul>
+{% block page_headings %}
+<style>
+    /* General Styling */
+    body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .a4 {
+        page-break-after: always;
+        width: 210mm;
+        height: 297mm;
+        margin: 10mm auto;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20mm;
+        box-sizing: border-box;
+    }
+
+    .a4:last-child {
+        page-break-after: avoid;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #4a4a4a;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        border-bottom: 2px solid #0077cc;
+        padding-bottom: 5px;
+    }
+
+    .content-block {
+        margin-bottom: 25px;
+    }
+
+    .content-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #2d2d2d;
+        margin-bottom: 5px;
+    }
+
+    .content-details {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+    }
+
+    .skills-list,
+    .languages-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .skills-list li,
+    .languages-list li {
+        font-size: 14px;
+        color: #2d2d2d;
+        margin-bottom: 5px;
+    }
+
+    .image-container {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #0077cc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .two-columns {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .column {
+        flex: 1;
+    }
+
+    .highlight {
+        color: #0077cc;
+    }
+
+    .badge {
+        display: inline-block;
+        background-color: #eef4fc;
+        color: #0077cc;
+        font-size: 12px;
+        padding: 5px 10px;
+        margin-right: 5px;
+        border-radius: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .two-columns {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock page_headings %}
+
+{% block page_body %}
+<div id="content">
+    
+    <page class="my-4 overflow-hidden a4" size="A4">
+        <!-- Header Section -->
+        <section>
+            <div class="text-center mb-6">
+                <div class="image-container mb-4">
+                    {% if userdetail.image %}
+                    <img src="{{ userdetail.image.url }}" alt="Profile Picture">
+                    {% endif %}
+                </div>
+                <h1 class="text-4xl font-semibold mb-2">{{ userdetail.first_name }} {{ userdetail.last_name }}</h1>
+                <p class="contact-info">
+                    📞 {{ userdetail.phone }} | ✉️ {{ userdetail.email }}
+                </p>
+                <p class="contact-info">
+                    📍 {{ userdetail.address.line1 }}, {{ userdetail.address.state.state }} ({{ userdetail.address.pin_code }})
+                </p>
+                {% if userdetail.portfolio %}
+                <p class="contact-info">
+                    🌐 <a href="{{ userdetail.portfolio }}">{{ userdetail.first_name }}'s Portfolio</a>
+                </p>
+                {% endif %}
             </div>
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold">Contact</h3>
-                <ul class="mt-4 space-y-4 text-gray-600">
-                    <li>
-                        <p class="flex items-center"><span class="mr-2">📞</span>+123-456-7890</p>
-                    </li>
-                    <li>
-                        <p class="flex items-center"><span class="mr-2">📧</span>hello@reallygreatsite.com</p>
-                    </li>
-                    <li>
-                        <p class="flex items-center"><span class="mr-2">🌐</span>www.reallygreatsite.com</p>
-                    </li>
-                    <li>
-                        <p class="flex items-center"><span class="mr-2">📍</span>123 Anywhere St., Any City</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+        </section>
+
+        <!-- Summary Section -->
+        <section>
+            <h2 class="section-title">Summary</h2>
+            <p class="content-details">{{ userdetail.summary }}</p>
+        </section>
+
+        <!-- Education Section -->
+        <section>
+            <h2 class="section-title">Education</h2>
+            {% for education in userdetail.education.all %}
+            <div class="content-title">{{ education.title }}</div>
+            <p class="content-details">{{ education.institute }} - <span class="highlight">{{ education.start_date }} - {{ education.end_date }}</span></p>
+            {% endfor %}
+        </section>
+
+        <!-- Work Experience Section -->
+        <section>
+            <h2 class="section-title">Work Experience</h2>
+            {% for experience in userdetail.experience.all %}
+            <div class="content-title">{{ experience.title }}</div>
+            <p class="content-details">{{ experience.company_name }} - <span class="highlight">{{ experience.start_date }} - {{ experience.end_date }}</span></p>
+            <p class="content-details">{{ experience.description }}</p>
+            {% endfor %}
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2 class="section-title">Projects</h2>
+            {% for project in userdetail.project.all %}
+            <div class="content-title">{{ project.title }}</div>
+            <p class="content-details">{{ project.desc }}</p>
+            <a href="{{ project.link }}" class="highlight">{{ project.link }}</a>
+            {% endfor %}
+        </section>
+
+        <!-- Certifications Section -->
+        <section>
+            <h2 class="section-title">Certifications</h2>
+            {% for certification in userdetail.certification.all %}
+            <div class="content-title">{{ certification.title }}</div>
+            <p class="content-details">{{ certification.institute }} - <span class="highlight">{{ certification.date }}</span></p>
+            {% endfor %}
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2 class="section-title">Skills</h2>
+            <ul class="skills-list">
+                {% for skill in userdetail.skill_id.all %}
+                <li class="content-details">{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Languages Section -->
+        {% if userdetail.language.all|length > 0 %}
+        <section>
+            <h2 class="section-title">Languages</h2>
+            <ul class="languages-list">
+                {% for language in userdetail.language.all %}
+                <li class="content-details">{{ language.language }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <!-- Strengths Section -->
+        {% if userdetail.strength.all|length > 0 %}
+        <section>
+            <h2 class="section-title">Strengths</h2>
+            {% for strength in userdetail.strength.all %}
+            <p class="content-details"><span class="highlight">💎</span>{{ strength.strength }}</p>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        <!-- Contact Details Section (if any additional fields) -->
+        {% if userdetail.other_contact %}
+        <section>
+            <h2 class="section-title">Other Contact Details</h2>
+            <p class="content-details">{{ userdetail.other_contact }}</p>
+        </section>
+        {% endif %}
+    </page>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const content = document.getElementById("content");
+        const pageHeight = 1122; // Approx height of A4 page in pixels for 96dpi resolution
+        const margin = 20; // Margin between pages
+        let pages = [...document.querySelectorAll(".a4")];
+
+        pages.forEach((page) => {
+            let contentBlocks = [...page.querySelectorAll("section")];
+            let newPage = null;
+            contentBlocks.forEach((block) => {
+                if (block.offsetTop + block.offsetHeight > pageHeight) {
+                    if (!newPage) {
+                        newPage = document.createElement("page");
+                        newPage.classList.add("a4");
+                        newPage.classList.add("my-4");
+                        newPage.classList.add("overflow-hidden");
+                        newPage.style.marginTop = `${margin}px`;
+                        content.appendChild(newPage);
+                        pages.push(newPage);
+                    }
+                    newPage.appendChild(block);
+                }
+            });
+        });
+    });
+</script>
+{% endblock page_body %}

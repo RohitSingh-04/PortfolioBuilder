@@ -14,7 +14,7 @@
         <!-- Create Resume Card -->
         <a href="/userinfo/createResume" class="card bg-gradient-to-r from-green-400 to-green-600 text-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl w-full sm:w-80 md:w-96">
             <div class="flex items-center justify-center h-48">
-                <img src="https://via.placeholder.com/200" alt="Create Resume" class="object-cover w-full h-full">
+                <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-resume-resume-flaticons-lineal-color-flat-icons.png" alt="Create Resume" class="object-cover w-48 mt-3 h-48">
             </div>
             <div class="p-4 text-center">
                 <h2 class="text-xl font-bold">Create Resume</h2>
@@ -43,20 +43,22 @@
     <p class="text-lg font-semibold">{{ request.user.first_name }} here are your {{ data_type }}</p>
 </div>
 
+<div class="flex flex-wrap justify-between gap-3 mt-3 p-4">
 
-{% for obj in resultset %}
-
-    <div class="container mx-auto px-4 py-6">
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {% for obj in resultset %}
+<!--     
+    <div class="container "> -->
+        <div class="flex w-1/5 flex-wrap">
             <!-- Card 1 -->
             <a href="{% if data_type == 'Resumes' %}/show/{{ obj.id }}{% else %}/route2{% endif %}" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
                 <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
                 <div class="p-4">
-                    <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">{% if data_type == 'Resumes' %}{{ obj.name }}{% else %}   {% endif %}</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">{% if data_type == 'Resumes' %}{{ obj.name }}{{ forloop.counter }}{% else %}   {% endif %}</h2>
                     <p class="text-gray-600">{% if data_type == 'Resumes' %}Created on - {{ obj.created_at }} and last Updated on - {{ obj.updated_at }}{% else %}    {% endif %}</p>
                 </div>
             </a>
         </div>
-    </div>
-{% endfor %}
+    <!-- </div> -->
+    {% endfor %}
+</div>
 {% endblock page_bodys %}

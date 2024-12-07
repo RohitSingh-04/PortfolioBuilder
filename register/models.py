@@ -85,11 +85,11 @@ class State(models.Model):
 
 class Address(models.Model):
     line1 = models.TextField()
-    state = models.ForeignKey(State, null=True,on_delete=models.SET_NULL)
+    state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL)
     pin_code = models.PositiveIntegerField()
     
     def __str__(self):
-        return self.line1+self.state.state+str(self.pin_code)
+        return self.line1+str(self.state)+str(self.pin_code)
 
 class Template(models.Model):
     template = models.TextField()

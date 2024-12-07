@@ -1,0 +1,298 @@
+{% extends 'template_template.html' %}
+
+{% block page_headings %}
+<style>
+    /* Shared A4 page styling */
+    .a4 {
+        width: 210mm;
+        height: 297mm;
+        margin: 20mm auto;
+        background: #ffffff;
+        padding: 15mm;
+        box-sizing: border-box;
+        page-break-after: always;
+        border: 1px solid #e1e6f0;
+    }
+
+    .a4:last-child {
+        page-break-after: avoid;
+    }
+
+    /* Body and Content Styles */
+    body {
+        font-family: 'Helvetica', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f6f9;
+        color: #2e3b4e;
+    }
+
+    h1, h2 {
+        color: #2d4379;
+        font-weight: 700;
+    }
+
+    h3 {
+        color: #555;
+        font-weight: 500;
+    }
+
+    p, ul, li {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Section Titles */
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2d4379;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #2d4379;
+    }
+
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    /* Header Section */
+    .header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+        color: #2c3e50;
+    }
+
+    .header .title {
+        font-size: 20px;
+        font-weight: 300;
+        color: #16a085;
+        margin-top: 5px;
+    }
+
+    .contact-info {
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+
+    .contact-info a {
+        color: #2980b9;
+        text-decoration: none;
+    }
+
+    .contact-info a:hover {
+        text-decoration: underline;
+    }
+
+    .header .contact-info span {
+        margin-right: 15px;
+    }
+
+    /* Profile Image Styling */
+    .profile-image-container {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .profile-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Skills List Styling */
+    .skills-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .skills-list li {
+        background-color: #ecf0f1;
+        padding: 5px 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    /* Experience & Education Section */
+    .experience-education-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .experience-education-container .column {
+        width: 48%;
+    }
+
+    .experience-entry, .education-entry {
+        margin-bottom: 15px;
+    }
+
+    .entry-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2980b9;
+    }
+
+    .entry-subtitle {
+        font-size: 14px;
+        color: #7f8c8d;
+    }
+
+    .entry-description {
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Footer Section */
+    .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 12px;
+        color: #7f8c8d;
+    }
+
+    .footer a {
+        color: #2980b9;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock page_headings %}
+
+{% block page_body %}
+<div id="content">
+    <page class="a4">
+        <!-- Header Section -->
+        <section class="header">
+            <div class="profile-image-container">
+                {% if userdetail.image %}
+                    <img src="{{ userdetail.image.url }}" alt="Profile Picture">
+                {% endif %}
+            </div>
+            <h1>{{ userdetail.first_name }} {{ userdetail.last_name }}</h1>
+            <div class="title">{{ userdetail.title }}</div>
+            <div class="contact-info">
+                <span>📞 {{ userdetail.phone }}</span>
+                <span>✉️ <a href="mailto:{{ userdetail.email }}">{{ userdetail.email }}</a></span>
+                <span>📍 {{ userdetail.address.line1 }}, {{ userdetail.address.state.state }} ({{ userdetail.address.pin_code }})</span>
+            </div>
+            {% if userdetail.portfolio %}
+                <div class="contact-info">
+                    🌐 <a href="{{ userdetail.portfolio }}" class="highlight">{{ userdetail.first_name }}'s Portfolio</a>
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- Summary Section -->
+        <section>
+            <h2 class="section-title">Summary</h2>
+            <p>{{ userdetail.summary }}</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2 class="section-title">Skills</h2>
+            <ul class="skills-list">
+                {% for skill in userdetail.skill_id.all %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Experience and Education Section -->
+        <section class="experience-education-container">
+            <div class="column">
+                <h2 class="section-title">Work Experience</h2>
+                {% for experience in userdetail.experience.all %}
+                <div class="experience-entry">
+                    <div class="entry-title">{{ experience.title }}</div>
+                    <div class="entry-subtitle">{{ experience.company_name }} ({{ experience.start_date }} - {{ experience.end_date }})</div>
+                    <div class="entry-description">{{ experience.description }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="column">
+                <h2 class="section-title">Education</h2>
+                {% for education in userdetail.education.all %}
+                <div class="education-entry">
+                    <div class="entry-title">{{ education.title }}</div>
+                    <div class="entry-subtitle">{{ education.institute }} ({{ education.start_date }} - {{ education.end_date }})</div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2 class="section-title">Projects</h2>
+            {% for project in userdetail.project.all %}
+            <div class="entry">
+                <div class="entry-title">{{ project.title }}</div>
+                <p>{{ project.desc }}</p>
+                <a href="{{ project.link }}" class="highlight">{{ project.link }}</a>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Certifications Section -->
+        <section>
+            <h2 class="section-title">Certifications</h2>
+            {% for certification in userdetail.certification.all %}
+            <div class="entry">
+                <div class="entry-title">{{ certification.title }}</div>
+                <div class="entry-subtitle">{{ certification.institute }} ({{ certification.date }})</div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Footer Section -->
+        <section class="footer">
+            <p>Generated by {{ userdetail.first_name }} {{ userdetail.last_name }} | All rights reserved.</p>
+        </section>
+    </div>
+</page>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const content = document.getElementById("content");
+        const pageHeight = 1122; // Approx height of A4 page in pixels for 96dpi resolution
+        const margin = 20; // Margin between pages
+        let pages = document.querySelectorAll(".a4");
+
+        pages.forEach((page) => {
+            let contentBlocks = [...page.querySelectorAll("section")];
+            let newPage = null;
+
+            contentBlocks.forEach((block) => {
+                if (block.offsetTop + block.offsetHeight > pageHeight) {
+                    if (!newPage) {
+                        newPage = document.createElement("page");
+                        newPage.classList.add("a4");
+                        newPage.style.marginTop = `${margin}px`;
+                        content.appendChild(newPage);
+                    }
+                    newPage.appendChild(block);
+                }
+            });
+        });
+    });
+</script>
+{% endblock page_body %}

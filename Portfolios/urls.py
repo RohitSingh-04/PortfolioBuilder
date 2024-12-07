@@ -12,7 +12,8 @@ urlpatterns = [
     path('documents/', views.fetch_docs),
     path('myresume/', views.fetch_resume),
     path('myportfs/', views.fetch_portfolios),
-    path('show/<int:id>/', views.show_resume)
+    path('show/<int:id>/', views.show_resume),
+    path('edit/<int:id>/', views.edit)
 ]
 # Serve media files during development
 if settings.DEBUG:

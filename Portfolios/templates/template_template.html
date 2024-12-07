@@ -2,8 +2,7 @@
 
 {% block page_heads %}
 
-<title>Page Name</title>
-
+<title>resume</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -29,81 +28,96 @@
         height: 21cm;
     }
 
-    page[size="A3"] {
-        width: 29.7cm;
-        height: 42cm;
-    }
-
-    page[size="A3"][layout="landscape"] {
-        width: 42cm;
-        height: 29.7cm;
-    }
-
-    page[size="A5"] {
-        width: 14.8cm;
-        height: 21cm;
-    }
-
-    page[size="A5"][layout="landscape"] {
-        width: 21cm;
-        height: 14.8cm;
-    }
-
     @media print {
 
-        body,
-        page {
+        
+        body * {
+            visibility: hidden; 
+        }
+        
+        page, page * {
             background: white;
             margin: 0;
             box-shadow: 0;
+            visibility: visible;
+            display: block; 
+            /* page-break-before: always;  */
         }
+
+        .a4 {
+            box-shadow: none;
+            margin: 0;
+        }
+                    
     }
 
-    .headingFont {
-        font-family: Volkhov;
-    }
-
-    .poppins-thin {
-        font-family: "Poppins", system-ui;
-        font-weight: 100;
-        font-style: normal;
-    }
-
-    .poppins-semibold {
-        font-family: "Poppins", system-ui;
-        font-weight: 500;
-        font-style: normal;
-    }
-
-    .poppins-regular {
-        font-family: "Poppins", system-ui;
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    .image-container {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* border: 2px solid #000; */
-    }
-
-    .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-    }
 </style>
 
 {% block page_headings %}
-    
+
 {% endblock page_headings %}
 
 {% endblock page_heads %}
 
+{% block page_bodys %}
+
+<div class="controls flex absolute right-0 top-20">
+
+    {% if userdetail.user == request.user %}
+        
+    <a title="Edit" href="/edit/{{ userdetail.id }}"><img width="50" height="50" src="https://img.icons8.com/cotton/50/create-new--v5.png" alt="editimage"/></a>
+    
+    {% endif %}
+
+    <button title="Print" id="printBtn" onclick="print_pages()"><img width="48" height="48" src="https://img.icons8.com/color/48/print.png" alt="print"/></button>
+
+    {% if userdetail.is_global %}
+        
+    <button title = "share" id = "share" onclick="share()"><img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/share.png" alt="share"/></button>
+    
+    {% endif %}
+</div>
+
+    {% block page_body %}
+    
+    {% endblock page_body %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.1.4/html2canvas.min.js"></script>
+
+    <script differ>
+        function print_pages() {
+            
+
+            const element = document.querySelector('page'); // Replace with your element ID
+
+            html2canvas(element).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                pdf.addImage(imgData, 'JPEG', 10, 10);
+                pdf.save('your_pdf_name.pdf');
+            });
+                }
+    </script>
+
+<script>
+
+    function share(){
+        text = "{{ request.get_host }}/show/{{ userdetail.id }}"
+        navigator.clipboard.writeText(text)
+                .then(() => {
+                    // Show success message
+                    statusMessage.textContent = "Text copied to clipboard!";
+                })
+                .catch(err => {
+                    // Handle errors
+                    statusMessage.textContent = "Failed to copy text!";
+                    console.error("Error copying text: ", err);
+                });
+        alert("link copied to clipboard!");
+    }
+
+</script>
+
+
+{% endblock page_bodys %}
 

@@ -4,13 +4,18 @@ from django.contrib.auth import login, logout, authenticate
 from register.models import UserResumeDetails
 from django.http import HttpResponseBadRequest, JsonResponse
 from register.models import *
- 
+from django.core.files.storage import default_storage
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
-    return render(request, 'home.html')
+        resultSet = UserResumeDetails.objects.filter(user = request.user).all()
+
+        return render(request, 'listdocs.html', {"data_type": "Resumes", "show_resume": True, "show_portfolio":False, "resultset":resultSet})
+    
+        # return render(request, 'dashboard.html')
+    return render(request, 'login.html')
 
 def login_fx(request):
     if request.method == 'POST':
@@ -59,8 +64,104 @@ def show_resume(request, id):
                 
         else:
             #not authorized
+            print(userdetail.is_global)
             return HttpResponseBadRequest()
             ...
-            
+
+
     else:
         return HttpResponseBadRequest()
+
+def edit(request, id):
+    if request.method == "GET":
+        userdetail = UserResumeDetails.objects.filter(id = id).first()
+        if request.user != userdetail.user:
+            return HttpResponseBadRequest()
+        return render(request, "edit.html", {'userdetail': userdetail, "resume_templates": Template.objects.all()})
+    
+    elif request.method == "POST":
+        user_resume = get_object_or_404(UserResumeDetails, id = id)  
+
+        # Get the updated values from the request
+        f_name = request.POST.get('fName')
+        l_name = request.POST.get('lName')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        portfolio = request.POST.get('portfolioLink', None)
+        summary = request.POST.get('summary')
+        is_global = request.POST.get('isGlobal') == 'on'
+        template = get_object_or_404(Template, template=request.POST.get('template'))
+
+        # Handle the Image (Delete old if new image is uploaded)
+        new_image = request.FILES.get('image', None)
+        if new_image:
+            # Delete the old image from the server if it exists
+            if user_resume.image:
+                try:
+                    # Remove the old image file from the storage
+                    default_storage.delete(user_resume.image.name)
+                except:
+                    pass
+
+            # Set the new image for the object
+            user_resume.image = new_image
+
+        # Handle ForeignKey: Address and State
+        state_name = request.POST.get('state')
+        state, _ = State.objects.get_or_create(state=state_name)
+        address, _ = Address.objects.get_or_create(
+            line1=request.POST.get('address'),
+            state=state,
+            pin_code=request.POST.get('zip')
+        )
+
+        # Update the main object
+        user_resume.first_name = f_name
+        user_resume.last_name = l_name
+        user_resume.email = email
+        user_resume.phone = phone
+        user_resume.portfolio = portfolio
+        user_resume.summary = summary
+        user_resume.address = address
+        user_resume.template = template
+        user_resume.is_global = is_global
+
+        # Handle ManyToMany: Skills
+        user_resume.skill_id.clear()  # Clear previous skills before adding new ones
+        for i in range(1, 9):  # Assuming 8 skill fields
+            skill_name = request.POST.get(f'skill{i}')
+            if skill_name:
+                skill, _ = Skills.objects.get_or_create(skill=skill_name)
+                user_resume.skill_id.add(skill)
+
+        # Handle ManyToMany: Education
+        user_resume.education.clear()  # Clear previous education entries
+        for i in range(1, 3):  # Assuming up to 2 education entries
+            title = request.POST.get(f'eTitle{i}')
+            institute = request.POST.get(f'eInstitute{i}')
+            start_date = request.POST.get(f'esd{i}')
+            end_date = request.POST.get(f'eed{i}')
+            if title and institute and start_date and end_date:
+                education, _ = Education.objects.get_or_create(
+                    title=title, institute=institute,
+                    start_date=start_date, end_date=end_date
+                )
+                user_resume.education.add(education)
+
+        # Handle ManyToMany: Social Media
+        user_resume.social.clear()  # Clear previous social media entries
+        for i in range(1, 4):  # Assuming 3 social media links
+            platform_name = request.POST.get(f'platformName{i}')
+            social_url = request.POST.get(f'socialURL{i}')
+            if platform_name and social_url:
+                social_media, _ = SocialMedia.objects.get_or_create(
+                    name=platform_name, url=social_url
+                )
+                user_resume.social.add(social_media)
+
+        # Save the updated object
+        user_resume.save()
+
+
+        return redirect(f"/show/{id}")
+

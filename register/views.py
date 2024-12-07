@@ -19,6 +19,7 @@ def createResume(request):
         portfolio = request.POST.get('portfolioLink', None)
         summary = request.POST.get('summary')
         image = request.FILES.get('image', None)
+        is_global  = request.POST.get('isGlobal') == 'on'
         # Handle ForeignKey: Template
         template = get_object_or_404(Template, template=request.POST.get('template'))
 
@@ -43,6 +44,7 @@ def createResume(request):
             address=address,
             image = image,
             template=template,
+            is_global = is_global
         )
 
         # Handle ManyToMany: Skills
@@ -80,10 +82,10 @@ def createResume(request):
         # Save the complete object
         user_resume.save()
 
-        return JsonResponse({'message': 'Resume created successfully!'})
+        return redirect('/')
 
         
-    return JsonResponse({"hii": 12})
+    return HttpResponseForbidden()
 
 def newUser(request):
     if request.method == 'POST':
