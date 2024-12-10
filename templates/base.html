@@ -24,6 +24,10 @@
             <a href="/" class="text-gray-100 hover:text-green-700">Home</a>
             <a href="#" class="text-gray-300 hover:text-green-700">About</a>
             <a href="https://findmyclass.tech/about.html" target="_blank" class="text-gray-300 hover:text-green-700">Developer</a>
+            
+            {% if request.user.is_superuser %}
+            <a href="/admin" class="text-gray-300 hover:text-green-700"> Admin</a>
+            {% endif %}
         </div>
 
         <!-- Right: User Icon and Popover -->
