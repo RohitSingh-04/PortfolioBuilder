@@ -27,35 +27,35 @@
                 <label for="fName" class="block text-white">First Name*</label>
                 <input type="text" name="fName" id="fName" maxlength="20" required
                     class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" {% if userdetail.first_name %}
-                        value = "{{ userdetail.first_name|default:'' }}"
+                        value = "{{ userdetail.first_name|default:"" }}"
                     {% endif %}/>
 
                 <label for="lName" class="block mt-4 text-white">Last Name*</label>
                 <input type="text" name="lName" id="lName" maxlength="20" required
-                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" value = "{{ userdetail.last_name|default:'' }}"/>
+                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" value = "{{ userdetail.last_name|default:"" }}"/>
             </div>
 
             <!-- Step 2 -->
             <div class="step">
                 <label for="email" class="block text-white">Email*</label>
                 <input type="text" name="email" id="email" placeholder="abc123@xyz.com" required
-                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" value = "{{ userdetail.email|default:'' }}"/>
+                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" value = "{{ userdetail.email|default:"" }}"/>
 
                 <label for="phone" class="block mt-4 text-white">Phone no.*</label>
                 <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" maxlength="10" required
-                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" value = "{{ userdetail.phone|default:'' }}"/>
+                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" value = "{{ userdetail.phone|default:"" }}"/>
 
 
                 <label for="address" class="block mt-4 text-white">Address*</label>
                 <div class="flex space-x-2">
                     <input type="text" name="address" id="address" placeholder="Address" required
-                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.address.line1|default:'' }}"/>
+                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.address.line1|default:"" }}"/>
                     <input type="text" name="state" id="state" placeholder="State" required
-                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.address.state|default:'' }}"/>
+                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.address.state|default:"" }}"/>
                 </div>
                 <div class="flex space-x-2 mt-2">
                     <input type="text" name="zip" id="zip" placeholder="Zip Code" required
-                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.address.pin_code|default:'' }}"/>
+                        class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.address.pin_code|default:"" }}"/>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
 
                 <label for="textarea" class="block mt-4 text-white">Summary (max 300 characters):</label>
                 <textarea id="textarea" cols="20" rows="5" name="summary" maxlength="300"
-                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900">{{ userdetail.summary|default:'' }}</textarea>
+                    class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900">{{ userdetail.summary|default:"" }}</textarea>
             </div>
 
             <!-- Step 4 -->
@@ -82,19 +82,19 @@
                 <div class="flex space-x-2">
                     <input type="text" name="eTitle1" id="eTitle1" placeholder="Title" required
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.title }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.title }}{% endif %}" />
                     <input type="text" name="eInstitute1" id="eInstitute1" placeholder="Institute" required
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.institute }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.institute }}{% endif %}" />
                 </div>
                 <div class="flex space-x-2 mt-2">
                     <label for="ed1" class="block text-white">Duration*:</label>
                     <input type="date" name="esd1" id="esd1"
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.start_date|date:"Y-m-d" }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.start_date|date:"Y-m-d" }}{% endif %}" />
                     <input type="date" name="eed1" id="eed1"
                         class="required border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.end_date|date:"Y-m-d" }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 0 %}{{ userdetail.education.all.0.end_date|date:"Y-m-d" }}{% endif %}" />
                 </div>
                 
                 <!-- Optional Education -->
@@ -102,19 +102,19 @@
                 <div class="flex space-x-2 mt-4">
                     <input type="text" name="eTitle2" id="eTitle2" placeholder="Title"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.title }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.title }}{% endif %}" />
                     <input type="text" name="eInstitute2" id="eInstitute2" placeholder="Institute"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.institute }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.institute }}{% endif %}" />
                 </div>
                 <div class="flex space-x-2 mt-2">
                     <label for="ed2" class="block text-white">Duration:</label>
                     <input type="date" name="esd2" id="esd2"
                         class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.start_date|date:"Y-m-d" }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.start_date|date:"Y-m-d" }}{% else %}""{% endif %}" />
                     <input type="date" name="eed2" id="eed2"
                         class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.end_date|date:"Y-m-d" }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.education.all|length > 1 %}{{ userdetail.education.all.1.end_date|date:"Y-m-d" }}{% else %}""{% endif %}" />
                 </div>
                 
                 
@@ -125,31 +125,31 @@
                 <label for="skill" class="block text-white">Skills</label>
                 <input type="text" name="skill1" id="skill1" placeholder="skill1*" required
                     class="required border px-3 py-2 rounded w-full border-gray-300 text-gray-900" 
-                    value="{% if userdetail.skill_id.all|length > 0 %}{{ userdetail.skill_id.all.0.skill }}{% else %}''{% endif %}" />
+                    value="{% if userdetail.skill_id.all|length > 0 %}{{ userdetail.skill_id.all.0.skill }}{% endif %}" />
                 
                 <span class="block mt-4 text-white mb-4">Optional</span>
                 <div class="grid grid-cols-2 gap-4">
                     <input type="text" name="skill2" id="skill2" placeholder="skill2"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 1 %}{{ userdetail.skill_id.all.1.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 1 %}{{ userdetail.skill_id.all.1.skill }}{% endif %}" />
                     <input type="text" name="skill3" id="skill3" placeholder="skill3"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 2 %}{{ userdetail.skill_id.all.2.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 2 %}{{ userdetail.skill_id.all.2.skill }}{% endif %}" />
                     <input type="text" name="skill4" id="skill4" placeholder="skill4"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 3 %}{{ userdetail.skill_id.all.3.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 3 %}{{ userdetail.skill_id.all.3.skill }}{% endif %}" />
                     <input type="text" name="skill5" id="skill5" placeholder="skill5"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 4 %}{{ userdetail.skill_id.all.4.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 4 %}{{ userdetail.skill_id.all.4.skill }}{% endif %}" />
                     <input type="text" name="skill6" id="skill6" placeholder="skill6"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 5 %}{{ userdetail.skill_id.all.5.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 5 %}{{ userdetail.skill_id.all.5.skill }}{% endif %}" />
                     <input type="text" name="skill7" id="skill7" placeholder="skill7"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 6 %}{{ userdetail.skill_id.all.6.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 6 %}{{ userdetail.skill_id.all.6.skill }}{% endif %}" />
                     <input type="text" name="skill8" id="skill8" placeholder="skill8"
                         class="border px-3 py-2 rounded w-full border-gray-300 text-gray-900"
-                        value="{% if userdetail.skill_id.all|length > 7 %}{{ userdetail.skill_id.all.7.skill }}{% else %}''{% endif %}" />
+                        value="{% if userdetail.skill_id.all|length > 7 %}{{ userdetail.skill_id.all.7.skill }}{% endif %}" />
                 </div>
                 
             </div>
@@ -209,40 +209,40 @@
         <div class="flex space-x-2">
             <input type="text" name="mpName1" id="mpName1" placeholder="Mini Project Name 1"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.title }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.title }}{% else %}""{% endif %}" />
             <input type="url" name="mpLink1" id="mpLink1" placeholder="https://example.com"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.link }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.link }}{% else %}""{% endif %}" />
         </div>
     
         <div class="flex space-x-2 mt-2">
             <label for="mpro" class="block text-white">Duration:</label>
             <input type="date" name="mpsd1" id="mpsd1"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.start_date|date:'Y-m-d' }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.start_date|date:'Y-m-d' }}{% else %}""{% endif %}" />
             <input type="date" name="mped1" id="mped1"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.end_date|date:'Y-m-d' }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 0 %}{{ userdetail.miniproject.all.0.end_date|date:'Y-m-d' }}{% else %}""{% endif %}" />
         </div>
     
         <!-- Second mini project -->
         <div class="flex space-x-2">
             <input type="text" name="mpName2" id="mpName2" placeholder="Mini Project Name 2"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.title }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.title }}{% else %}""{% endif %}" />
             <input type="url" name="mpLink2" id="mpLink2" placeholder="https://example.com"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.link }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.link }}{% else %}""{% endif %}" />
         </div>
     
         <div class="flex space-x-2 mt-2">
             <label for="mpro2" class="block text-white">Duration:</label>
             <input type="date" name="mpsd2" id="mpsd2"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.start_date|date:'Y-m-d' }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.start_date|date:'Y-m-d' }}{% else %}""{% endif %}" />
             <input type="date" name="mped2" id="mped2"
                 class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900"
-                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.end_date|date:'Y-m-d' }}{% else %}''{% endif %}" />
+                value="{% if userdetail.miniproject.all|length > 1 %}{{ userdetail.miniproject.all.1.end_date|date:'Y-m-d' }}{% else %}""{% endif %}" />
         </div>
     
                     </div>
@@ -472,7 +472,7 @@
                 
                 <span class = "block mt-4 text-white mb-4">Optional</span>
                 <input class="rounded-sm border p-1 " type="url" name="portfolioLink" id="portfolioLink" placeholder="https://example.com"
-                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.portfolio|default:'' }}"/>
+                            class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900" value = "{{ userdetail.portfolio|default:"" }}"/>
                 </div>
             
             <!-- Step 12-->
@@ -611,7 +611,7 @@
 
                 let requiredInputs = steps[currentStep].querySelectorAll('.required');
                 for (let i = 0; i < requiredInputs.length; i++) {
-                    if (requiredInputs[i].value == '') {
+                    if (requiredInputs[i].value == "") {
 
                         alert('Please fill out all required fields.');
                         return;

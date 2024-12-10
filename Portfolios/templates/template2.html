@@ -158,6 +158,8 @@
         </section>
 
         <!-- Work Experience Section -->
+
+        {% if userdetail.experience.all|length > 0 %}
         <section>
             <h2 class="section-title">Work Experience</h2>
             {% for experience in userdetail.experience.all %}
@@ -166,8 +168,10 @@
             <p class="content-details">{{ experience.description }}</p>
             {% endfor %}
         </section>
+        {% endif %}
 
         <!-- Projects Section -->
+        {% if userdetail.project.all|length > 0 %}
         <section>
             <h2 class="section-title">Projects</h2>
             {% for project in userdetail.project.all %}
@@ -176,26 +180,41 @@
             <a href="{{ project.link }}" class="highlight">{{ project.link }}</a>
             {% endfor %}
         </section>
+        {% endif %}
 
-        <!-- Certifications Section -->
+        <!-- Mini Projects Section -->
+        {% if userdetail.miniproject.all|length > 0 %}
         <section>
-            <h2 class="section-title">Certifications</h2>
-            {% for certification in userdetail.certification.all %}
-            <div class="content-title">{{ certification.title }}</div>
-            <p class="content-details">{{ certification.institute }} - <span class="highlight">{{ certification.date }}</span></p>
+            <h2 class="section-title">Mini Projects</h2>
+            {% for miniproject in userdetail.miniproject.all %}
+            <div class="content-title">{{ miniproject.title }}</div>
+            <a href="{{ miniproject.link }}" class="highlight">{{ miniproject.link }}</a>
+            <p class="content-details"><span class="highlight">{{ miniproject.start_date }} - {{ miniproject.end_date }}</span></p>
             {% endfor %}
         </section>
+        {% endif %}
 
-        <!-- Skills Section -->
-        <section>
-            <h2 class="section-title">Skills</h2>
-            <ul class="skills-list">
-                {% for skill in userdetail.skill_id.all %}
-                <li class="content-details">{{ skill }}</li>
-                {% endfor %}
-            </ul>
+        <!-- Certifications Section -->
+        {% if userdetail.certification.all|length > 0 %}
+        <h2 class="section-title">Certifications</h2>
+        {% for certification in userdetail.certification.all %}
+        <div class="content-title">{{ certification.title }}</div>
+        <p class="content-details">{{ certification.institute }} - <span class="highlight">{{ certification.date }}</span></p>
+        {% endfor %}
         </section>
+        {% endif %}
 
+        {% if userdetail.skill_id.all|length > 0 %}
+        <section>
+        <h2 class="section-title">Skills</h2>
+        <ul class="skills-list">
+            {% for skill in userdetail.skill_id.all %}
+            <li class="content-details">{{ skill }}</li>
+            {% endfor %}
+        </ul>
+        </section>
+        {% endif %}
+        
         <!-- Languages Section -->
         {% if userdetail.language.all|length > 0 %}
         <section>

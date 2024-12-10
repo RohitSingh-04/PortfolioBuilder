@@ -66,10 +66,11 @@
     {% if userdetail.user == request.user %}
         
     <a title="Edit" href="/edit/{{ userdetail.id }}"><img width="50" height="50" src="https://img.icons8.com/cotton/50/create-new--v5.png" alt="editimage"/></a>
+    <a title="Delete" href="/delete/{{ userdetail.id }}"><img width="50" height="50" src="https://img.icons8.com/color/48/delete-forever.png" alt="editimage"/></a>
     
     {% endif %}
 
-    <button title="Print" id="printBtn" onclick="print_pages()"><img width="48" height="48" src="https://img.icons8.com/color/48/print.png" alt="print"/></button>
+    <!-- <button title="Print" id="printBtn" onclick="print_pages()"><img width="48" height="48" src="https://img.icons8.com/color/48/print.png" alt="print"/></button> -->
 
     {% if userdetail.is_global %}
         
@@ -81,21 +82,10 @@
     {% block page_body %}
     
     {% endblock page_body %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.1.4/html2canvas.min.js"></script>
 
     <script differ>
         function print_pages() {
             
-
-            const element = document.querySelector('page'); // Replace with your element ID
-
-            html2canvas(element).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF();
-                pdf.addImage(imgData, 'JPEG', 10, 10);
-                pdf.save('your_pdf_name.pdf');
-            });
                 }
     </script>
 

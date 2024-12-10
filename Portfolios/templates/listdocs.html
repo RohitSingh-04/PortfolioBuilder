@@ -53,7 +53,7 @@
             <a href="{% if data_type == 'Resumes' %}/show/{{ obj.id }}{% else %}/route2{% endif %}" class="group block bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
                 <img src="https://via.placeholder.com/400x250" alt="Demo Image" class="w-full h-40 object-cover">
                 <div class="p-4">
-                    <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">{% if data_type == 'Resumes' %}{{ obj.name }}{{ forloop.counter }}{% else %}   {% endif %}</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-500">{% if data_type == 'Resumes' %}{{ obj.name.capitalize }} {{ forloop.counter }}{% else %}   {% endif %}</h2>
                     <p class="text-gray-600">{% if data_type == 'Resumes' %}Created on - {{ obj.created_at }} and last Updated on - {{ obj.updated_at }}{% else %}    {% endif %}</p>
                 </div>
             </a>

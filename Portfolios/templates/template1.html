@@ -121,10 +121,12 @@
                         <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-2 headingFont">Minor Projects</h2>
                         <div class="flex flex-wrap poppins-semibold">
                             {% for miniprj in userdetail.miniproject.all %}
-                                
-                            <h3 class="text-xl headingFont font-medium">{{ miniprj.title }}</h3>
-                            <p class="flex items-center text-sm mb-2 border-b-2"><span class="mr-2">📅</span>{{ miniprj.start_date }} - {{ miniprj.end_date }}</p>
-                            <a href="{{ project.link }}" class="text-blue-600 mb-1">🔗 {{ miniprj.link }}</a>
+                                <div class="container">
+
+                                    <h3 class="text-xl headingFont font-medium">{{ miniprj.title }}</h3>
+                                    <p class="flex items-center text-sm mb-2 border-b-2"><span class="mr-2">📅</span>{{ miniprj.start_date }} - {{ miniprj.end_date }}</p>
+                                    <a href="{{ project.link }}" class="text-blue-600 mb-1">🔗 {{ miniprj.link }}</a>
+                                </div>
                             
                             {% endfor %}
                         </div>

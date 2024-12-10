@@ -159,9 +159,86 @@ def edit(request, id):
                 )
                 user_resume.social.add(social_media)
 
+        # Handle ManyToMany: Certifications
+        user_resume.certification.clear()  # Clear previous certifications
+        for i in range(1, 4):  # Assuming up to 3 certifications
+            certificate_name = request.POST.get(f'cTitle{i}')
+            issued_by = request.POST.get(f'cOrganisation{i}')
+            start_date = request.POST.get(f'csd{i}')
+            end_date = request.POST.get(f'ced{i}')
+            if certificate_name and issued_by and start_date and end_date:
+                certification, _ = Certification.objects.get_or_create(
+                    title=certificate_name, institute=issued_by, start_date=start_date, end_date=end_date
+                )
+                user_resume.certification.add(certification)
+            
+        # Handle ManyToMany: Experience
+        user_resume.experience.clear()  # Clear previous experience entries
+        for i in range(1, 3):  # Assuming up to 2 experience entries
+            title = request.POST.get(f'exTitle{i}')
+            org = request.POST.get(f'exOrganisation{i}')
+            location = request.POST.get(f'location{i}')
+            start_date = request.POST.get(f'exsd{i}')
+            end_date = request.POST.get(f'exed{i}')
+            description = request.POST.get(f'exDescription{i}')
+            if title and org and start_date and end_date and description:
+                experience, _ = Experience.objects.get_or_create(
+                    title=title, org=org, location=location,
+                    start_date=start_date, end_date=end_date,
+                    description=description
+                )
+                user_resume.experience.add(experience)
+
+        # Handle ManyToMany: Projects
+        user_resume.project.clear()  # Clear previous project entries
+        for i in range(1, 3):  # Assuming up to 2 project entries
+            title = request.POST.get(f'pName{i}')
+            desc = request.POST.get(f'pDescription{i}')
+            link = request.POST.get(f'pLink{i}')
+            start_date = request.POST.get(f'psd{i}')
+            end_date = request.POST.get(f'ped{i}')
+            if title and desc and link and start_date and end_date:
+                project, _ = Project.objects.get_or_create(
+                    title=title, desc=desc, link=link,
+                    start_date=start_date, end_date=end_date
+                )
+                user_resume.project.add(project)
+
+        # Handle ManyToMany: MiniProjects
+        user_resume.miniproject.clear()  # Clear previous mini project entries
+        for i in range(1, 3):  # Assuming up to 2 mini project entries
+            title = request.POST.get(f'mpName{i}')
+            link = request.POST.get(f'mpLink{i}')
+            start_date = request.POST.get(f'mpsd{i}')
+            end_date = request.POST.get(f'mped{i}')
+            if title and link and start_date and end_date:
+                mini_project, _ = MiniProjects.objects.get_or_create(
+                    title=title, link=link,
+                    start_date=start_date, end_date=end_date
+                )
+                user_resume.miniproject.add(mini_project)
+
+        # Handle ManyToMany: Strengths
+        user_resume.strength.clear()  # Clear previous strength entries
+        for i in range(1, 4):  # Assuming up to 3 strength entries
+            strength_name = request.POST.get(f'strength{i}')
+            if strength_name:
+                strength, _ = Strength.objects.get_or_create(strength=strength_name)
+                user_resume.strength.add(strength)
+
         # Save the updated object
         user_resume.save()
 
 
+
         return redirect(f"/show/{id}")
 
+def delete(request, id):
+    if request.method == "GET":
+        userdetail = UserResumeDetails.objects.filter(id = id).first()
+        if request.user != userdetail.user:
+            return HttpResponseBadRequest()
+        userdetail.delete()
+        return redirect('/')
+    else:
+        return HttpResponseBadRequest()

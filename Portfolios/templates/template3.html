@@ -63,6 +63,7 @@
         </section>
 
         <!-- Experience Section -->
+         {% if userdetail.experience.all %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Experience</h2>
             {% if userdetail.experience.all %}
@@ -86,25 +87,41 @@
                 {% endfor %}
             {% endif %}
         </section>
+        {% endif %}
 
         <!-- Projects Section -->
+        {% if userdetail.project.all %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Projects</h2>
-            {% if userdetail.project.all %}
-                {% for project in userdetail.project.all %}
-                <div class="mb-2">
-                    <h3 class="text-sm font-semibold text-gray-700">{{ project.title }}</h3>
-                    <p class="text-gray-600 text-xs">{{ project.desc }}</p>
-                    <p class="text-gray-600 text-xs">{{ project.start_date|date:"M Y" }} - {{ project.end_date|date:"M Y" }}</p>
-                    {% if project.link %}
-                    <a href="{{ project.link }}" class="text-blue-500 text-xs underline" target="_blank">View Project</a>
-                    {% endif %}
-                </div>
-                {% endfor %}
+            {% for project in userdetail.project.all %}
+            <div class="mb-2">
+            <h3 class="text-sm font-semibold text-gray-700">{{ project.title }}</h3>
+            <p class="text-gray-600 text-xs">{{ project.desc }}</p>
+            <p class="text-gray-600 text-xs">{{ project.start_date|date:"M Y" }} - {{ project.end_date|date:"M Y" }}</p>
+            {% if project.link %}
+            <a href="{{ project.link }}" class="text-blue-500 text-xs underline" target="_blank">View Project</a>
             {% endif %}
+            </div>
+            {% endfor %}
         </section>
+        {% endif %}
+
+        <!-- Mini Projects Section -->
+        {% if userdetail.miniproject.all %}
+        <section class="mb-4">
+            <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Mini Projects</h2>
+            {% for miniproject in userdetail.miniproject.all %}
+            <div class="mb-2">
+            <h3 class="text-sm font-semibold text-gray-700">{{ miniproject.title }}</h3>
+            <p class="text-gray-600 text-xs">{{ miniproject.start_date|date:"M Y" }} - {{ miniproject.end_date|date:"M Y" }}</p>
+            <a href="{{ miniproject.link }}" class="text-blue-500 text-xs underline" target="_blank">View Project</a>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
 
         <!-- Certifications Section -->
+         {% if userdetail.certification.all %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Certifications</h2>
             {% if userdetail.certification.all %}
@@ -118,8 +135,10 @@
                 </ul>
             {% endif %}
         </section>
+        {% endif %}
 
         <!-- Education Section -->
+        {% if userdetail.education.all %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Education</h2>
             {% if userdetail.education.all %}
@@ -131,7 +150,7 @@
                 {% endfor %}
             {% endif %}
         </section>
-
+        {% endif %}
     </page>
   </div>
 
