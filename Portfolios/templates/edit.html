@@ -358,7 +358,7 @@
                 value=""
             {% endif %} />
 
-        <input type="text" name="exOrganisation" id="exOrganisation" placeholder="Organisation"
+        <input type="text" name="exOrganisation1" id="exOrganisation" placeholder="Organisation"
             class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900 mt-2"
             {% if userdetail.experience.all|length > 0 %}
                 value="{{ userdetail.experience.all.0.org }}"
@@ -366,7 +366,7 @@
                 value=""
             {% endif %} />
         
-        <input type="text" name="exDescription" id="exDescription" placeholder="Description"
+        <input type="text" name="exDescription1" id="exDescription" placeholder="Description"
             class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900"
             {% if userdetail.experience.all|length > 0 %}
                 value="{{ userdetail.experience.all.0.description }}"
@@ -374,7 +374,7 @@
                 value=""
             {% endif %} />
 
-        <input type="text" name="location" placeholder="Location" class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900"
+        <input type="text" name="location1" placeholder="Location" class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900"
             {% if userdetail.experience.all|length > 0 %}
                 value="{{ userdetail.experience.all.0.location }}"
             {% else %}
@@ -408,7 +408,7 @@
                 value=""
             {% endif %} />
 
-        <input type="text" name="exOrganisation" id="exOrganisation" placeholder="Organisation"
+        <input type="text" name="exOrganisation2" id="exOrganisation" placeholder="Organisation"
             class="border px-3 py-2 rounded flex-1 border-gray-300 text-gray-900 mt-2"
             {% if userdetail.experience.all|length > 1 %}
                 value="{{ userdetail.experience.all.1.org }}"
@@ -416,7 +416,7 @@
                 value=""
             {% endif %} />
 
-        <input type="text" name="exDescription" id="exDescription" placeholder="Description"
+        <input type="text" name="exDescription2" id="exDescription" placeholder="Description"
             class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900"
             {% if userdetail.experience.all|length > 1 %}
                 value="{{ userdetail.experience.all.1.description }}"
@@ -424,7 +424,7 @@
                 value=""
             {% endif %} />
 
-        <input type="text" name="location" placeholder="Location" class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900"
+        <input type="text" name="location2" placeholder="Location" class="border mt-2 px-3 py-2 rounded w-full border-gray-300 text-gray-900"
             {% if userdetail.experience.all|length > 1 %}
                 value="{{ userdetail.experience.all.1.location }}"
             {% else %}

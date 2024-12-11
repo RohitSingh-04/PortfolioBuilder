@@ -219,16 +219,7 @@
 
         <!-- Experience and Education Section -->
         <section class="experience-education-container">
-            <div class="column">
-                <h2 class="section-title">Work Experience</h2>
-                {% for experience in userdetail.experience.all %}
-                <div class="experience-entry">
-                    <div class="entry-title">{{ experience.title }}</div>
-                    <div class="entry-subtitle">{{ experience.company_name }} ({{ experience.start_date }} - {{ experience.end_date }})</div>
-                    <div class="entry-description">{{ experience.description }}</div>
-                </div>
-                {% endfor %}
-            </div>
+            
             <div class="column">
                 <h2 class="section-title">Education</h2>
                 {% for education in userdetail.education.all %}
@@ -238,6 +229,23 @@
                 </div>
                 {% endfor %}
             </div>
+
+            
+            {% if userdetail.experience.all|length > 0 %}
+            <div class="column">
+                <h2 class="section-title">Experience</h2>
+                {% for experience in userdetail.experience.all %}
+                <div class="experience-entry">
+                    <div class="entry-title">{{ experience.title }}</div>
+                    <div class="entry-subtitle">{{ experience.org }}{% if experience.location %}, {{ experience.location }}{% endif %} ({{ experience.start_date }} - {% if experience.is_current %}Present{% else %}{{ experience.end_date }}{% endif %})</div>
+                    <p class="entry-description">{{ experience.description }}</p>
+                </div>
+                
+                {% endfor %}
+                
+            </div>
+            {% endif %}
+
         </section>
 
         <!-- Projects Section -->
@@ -269,7 +277,9 @@
         </section>
     </div>
 </page>
+{% endblock page_body %}
 
+{% block page_script %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const content = document.getElementById("content");
@@ -295,4 +305,4 @@
         });
     });
 </script>
-{% endblock page_body %}
+{% endblock page_script %}

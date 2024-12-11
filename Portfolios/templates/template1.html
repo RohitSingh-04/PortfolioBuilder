@@ -47,7 +47,7 @@
 {% block page_body %}
     
     <page class="my-4 overflow-hidden" size="A4">
-        <div class="w-full bg-white h-40 flex p-7 mb-6">
+        <div class="w-full bg-white h-40 flex p-7 mb-6" id ="top-section">
             <div class="w-4/5 mr-10 p-5">
                 <h1 class="headingFont text-black text-4xl font-semibold tracking-wider mb-2">{{ userdetail.first_name }} {{ userdetail.last_name }}</h1>
                 <div class="flex tracking-tighter poppins-semibold text-xs mb-2">
@@ -74,15 +74,15 @@
             <!-- Main Container -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Left Column -->
-                <div class="col-span-2">
+                <div class="col-span-2" id="left-col">
                     <!-- SUMMARY -->
-                    <div class="mb-5 ">
+                    <div class="mb-5 left-col-data">
                         <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-4 headingFont">SUMMARY</h2>
                         <p class="text-sm poppins-regular leading-tight">{{ userdetail.summary }}</p>
                     </div>
     
                     <!-- EDUCATION -->
-                    <div class="mb-5">
+                    <div class="mb-5 left-col-data">
                         <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-4 headingFont">EDUCATION</h2>
                         {% for education in userdetail.education.all %}
                             
@@ -96,7 +96,7 @@
                     <!-- PROJECTS -->
                      {% if userdetail.project.all|length > 0 %}
                         
-                     <div class="mb-5">
+                     <div class="mb-5 left-col-data">
                          <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-3 headingFont">PROJECTS</h2>
                          {% for project in userdetail.project.all %}
                          
@@ -106,18 +106,28 @@
                          <a href="{{ project.link }}" class="text-blue-600 mb-1">🔗 {{ project.link }}</a>
                         {% endfor %}
                     </div>
-                        
-                    </div>
                     {% endif %}
 
-                    
-                
-                    {% if userdetail.miniproject.all|length  > 0 %}
+
+                        <!-- EXPERIENCE -->
+                        {% if userdetail.experience.all|length > 0 %}
+                        <div class="mb-5 left-col-data">
+                            <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-4 headingFont">EXPERIENCE</h2>
+                            {% for experience in userdetail.experience.all %}
+                            <h3 class="text-xl font-semibold">{{ experience.title }}</h3>
+                            <p class="text-blue-600 mb-1">{{ experience.org }}</p>
+                            <p class="flex items-center text-sm"><span class="mr-2">📅</span>{{ experience.start_date }} - {% if experience.is_current %}Present{% else %}{{ experience.end_date }}{% endif %}</p>
+                            <p class="text-sm poppins-regular leading-tight">{{ experience.description }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+   
+                    <!-- Right Column -->
+                    <div class="space-y-8" id="right-col">
                         
-                <!-- Right Column -->
-                <div class="space-y-8">
-                    
-                    <div>
+                    {% if userdetail.miniproject.all|length  > 0 %}
+                    <div class="right-col-data">
                         <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-2 headingFont">Minor Projects</h2>
                         <div class="flex flex-wrap poppins-semibold">
                             {% for miniprj in userdetail.miniproject.all %}
@@ -133,7 +143,8 @@
                     </div>
                     
                     {% endif %}
-                    <div>
+
+                    <div class="right-col-data">
                         <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-2 headingFont">SKILLS</h2>
                         <div class="flex flex-wrap poppins-semibold">
                             {% for skill in userdetail.skill_id.all %}
@@ -145,7 +156,7 @@
                     <!-- LANGUAGES -->
                      {% if userdetail.language.all|length > 0 %}
                         
-                     <div>
+                     <div class="right-col-data">
                          <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-2 headingFont">LANGUAGES</h2>
                          {% for language in userdetail.language.all %}
                          <div class="mb-4 poppins-semibold">
@@ -157,7 +168,7 @@
                         
                     <!-- STRENGTHS -->
                     {% if userdetail.strength.all|length > 0%}
-                    <div>
+                    <div class="right-col-data">
                             
                         <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-2 headingFont">STRENGTHS</h2>
                         {% for strength in userdetail.strength.all %}
@@ -171,9 +182,110 @@
                         
                     </div>
                     {% endif %}
+                    <!-- CERTIFICATIONS -->
+                    {% if userdetail.certification.all|length > 0 %}
+                    <div class="mb-5 left-col-data">
+                        <h2 class="text-2xl font-bold border-b-2 border-black pb-2 mb-4 headingFont">CERTIFICATIONS</h2>
+                        {% for certification in userdetail.certification.all %}
+                        <h3 class="text-xl font-semibold">{{ certification.title }}</h3>
+                        <p class="text-blue-600 mb-1">{{ certification.institute }}</p>
+                        <p class="flex items-center text-sm"><span class="mr-2">📅</span>{{ certification.start_date }} - {{ certification.end_date }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </page>
-
+    
 {% endblock page_body %}
+
+
+{% block page_script %}
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to check and split overflowing content into new pages
+    function handleOverflow() {
+        const pages = document.querySelectorAll("page[size='A4']");
+        let count = 0
+        pages.forEach((page) => {
+            const leftCol = page.querySelector("#left-col");
+            const rightCol = page.querySelector("#right-col");
+
+            const pageHeight = page.getBoundingClientRect().height;
+            var sectionHeight = 0;
+            
+            if (count == 0){
+                sectionHeight = page.querySelector("#top-section").getBoundingClientRect().height;
+            }
+            else{
+                sectionHeight = 0;
+            }
+            // Check and handle overflow for left column
+            handleColumnOverflow(leftCol, pageHeight);
+
+            // Check and handle overflow for right column
+            handleColumnOverflow(rightCol, pageHeight);
+        });
+    }
+
+    // Function to split overflowing column into new pages
+    function handleColumnOverflow(column, pageHeight) {
+        if (!column) return;
+
+        const items = [...column.children];
+        let currentPage = column.closest("page");
+        let newPage = null;
+
+        while (column.getBoundingClientRect().height > pageHeight) {
+            // Create a new page if not exists
+            if (!newPage) {
+                newPage = createNewPage();
+                currentPage.after(newPage);
+
+                const newLeftCol = newPage.querySelector("#left-col");
+                const newRightCol = newPage.querySelector("#right-col");
+
+                // Clone structure of the original column
+                if (column.id === "left-col") {
+                    column = newLeftCol;
+                } else {
+                    column = newRightCol;
+                }
+            }
+
+            // Move last item to new column
+            const lastItem = items.pop();
+            if (lastItem) {
+                column.insertBefore(lastItem, column.firstChild);
+            }
+        }
+    }
+
+    // Function to create a new page
+    function createNewPage() {
+        const newPage = document.createElement("page");
+        newPage.setAttribute("size", "A4");
+        newPage.className = "my-4 overflow-hidden";
+
+        const newDivContainer = `
+            <div class="max-w-5xl mx-auto p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="col-span-2" id="left-col"></div>
+                    <div class="space-y-8" id="right-col"></div>
+                </div>
+            </div>
+        `;
+        newPage.innerHTML = newDivContainer;
+
+        return newPage;
+    }
+
+    // Trigger the handling of overflow
+    handleOverflow();
+});
+
+
+    </script>
+{% endblock page_script %}

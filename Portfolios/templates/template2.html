@@ -196,12 +196,15 @@
 
         <!-- Certifications Section -->
         {% if userdetail.certification.all|length > 0 %}
-        <h2 class="section-title">Certifications</h2>
-        {% for certification in userdetail.certification.all %}
-        <div class="content-title">{{ certification.title }}</div>
-        <p class="content-details">{{ certification.institute }} - <span class="highlight">{{ certification.date }}</span></p>
-        {% endfor %}
+        <section>
+
+            <h2 class="section-title">Certifications</h2>
+            {% for certification in userdetail.certification.all %}
+            <div class="content-title">{{ certification.title }}</div>
+            <p class="content-details">{{ certification.institute }} - <span class="highlight">{{ certification.start_date }} - {{ certification.end_date }}</span></p>
+            {% endfor %}
         </section>
+    
         {% endif %}
 
         {% if userdetail.skill_id.all|length > 0 %}
@@ -247,6 +250,9 @@
     </page>
 </div>
 
+{% endblock page_body %}
+
+{% block page_script %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const content = document.getElementById("content");
@@ -274,4 +280,4 @@
         });
     });
 </script>
-{% endblock page_body %}
+{% endblock page_script %}

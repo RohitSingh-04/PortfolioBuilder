@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from register.models import UserResumeDetails
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -37,7 +38,7 @@ def logout_fx(request):
 def fetch_docs(request):
     return render(request, 'listdocs.html', {"data_type": "Documents", "show_resume": True, "show_portfolio":True})
     # to add logic for all the documents
-
+@login_required(login_url='/login/')
 def fetch_resume(request):
     
     resultSet = UserResumeDetails.objects.filter(user = request.user).all()
@@ -72,6 +73,7 @@ def show_resume(request, id):
     else:
         return HttpResponseBadRequest()
 
+@login_required(login_url='/login/')
 def edit(request, id):
     if request.method == "GET":
         userdetail = UserResumeDetails.objects.filter(id = id).first()
@@ -232,7 +234,8 @@ def edit(request, id):
 
 
         return redirect(f"/show/{id}")
-
+    
+@login_required(login_url='/login/')
 def delete(request, id):
     if request.method == "GET":
         userdetail = UserResumeDetails.objects.filter(id = id).first()

@@ -63,7 +63,7 @@
         </section>
 
         <!-- Experience Section -->
-         {% if userdetail.experience.all %}
+         {% if userdetail.experience.all|length > 0 %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Experience</h2>
             {% if userdetail.experience.all %}
@@ -90,7 +90,7 @@
         {% endif %}
 
         <!-- Projects Section -->
-        {% if userdetail.project.all %}
+        {% if userdetail.project.all|length > 0 %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Projects</h2>
             {% for project in userdetail.project.all %}
@@ -107,7 +107,7 @@
         {% endif %}
 
         <!-- Mini Projects Section -->
-        {% if userdetail.miniproject.all %}
+        {% if userdetail.miniproject.all|length > 0 %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Mini Projects</h2>
             {% for miniproject in userdetail.miniproject.all %}
@@ -121,7 +121,7 @@
         {% endif %}
 
         <!-- Certifications Section -->
-         {% if userdetail.certification.all %}
+         {% if userdetail.certification.all|length > 0 %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Certifications</h2>
             {% if userdetail.certification.all %}
@@ -138,7 +138,7 @@
         {% endif %}
 
         <!-- Education Section -->
-        {% if userdetail.education.all %}
+        {% if userdetail.education.all|length > 0 %}
         <section class="mb-4">
             <h2 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-1">Education</h2>
             {% if userdetail.education.all %}
@@ -153,7 +153,8 @@
         {% endif %}
     </page>
   </div>
-
+{% endblock page_body %}
+{% block page_script %}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
         const content = document.getElementById("content");
@@ -179,4 +180,4 @@
         });
     });
   </script>
-{% endblock page_body %}
+{% endblock page_script %}

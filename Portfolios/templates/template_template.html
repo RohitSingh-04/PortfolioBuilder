@@ -16,11 +16,14 @@
         margin: 0 auto;
         margin-bottom: 0.5cm;
         box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+        transform: scale(0.95);
+        transform-origin: top center;
     }
 
     page[size="A4"] {
         width: 21cm;
         height: 29.7cm;
+        page-break-after: always;
     }
 
     page[size="A4"][layout="landscape"] {
@@ -83,31 +86,36 @@
     
     {% endblock page_body %}
 
-    <script differ>
-        function print_pages() {
-            
-                }
-    </script>
+{% endblock page_bodys %}
+
+
+
+{% block page_scripts %}
+<script differ>
+    function print_pages() {
+        
+            }
+</script>
 
 <script>
 
-    function share(){
-        text = "{{ request.get_host }}/show/{{ userdetail.id }}"
-        navigator.clipboard.writeText(text)
-                .then(() => {
-                    // Show success message
-                    statusMessage.textContent = "Text copied to clipboard!";
-                })
-                .catch(err => {
-                    // Handle errors
-                    statusMessage.textContent = "Failed to copy text!";
-                    console.error("Error copying text: ", err);
-                });
-        alert("link copied to clipboard!");
-    }
+function share(){
+    text = "{{ request.get_host }}/show/{{ userdetail.id }}"
+    navigator.clipboard.writeText(text)
+            .then(() => {
+                // Show success message
+                statusMessage.textContent = "Text copied to clipboard!";
+            })
+            .catch(err => {
+                // Handle errors
+                statusMessage.textContent = "Failed to copy text!";
+                console.error("Error copying text: ", err);
+            });
+    alert("link copied to clipboard!");
+}
 
 </script>
+{% block page_script %}
+{% endblock page_script %}
 
-
-{% endblock page_bodys %}
-
+{% endblock page_scripts %}
