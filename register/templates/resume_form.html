@@ -299,7 +299,7 @@
                     <h1 class="text-white"> Choose Template*</h1>
                     
                     {% for template in resume_templates %}
-                        <input type="radio" name="template" value="{{ template.template }}" class="required block text-white" />{{ forloop.counter }}. {{ template.template }}<br>
+                        <input type="radio" name="template" value="{{ template.template }}" class="required" /><span class="text-white">{{ forloop.counter }}. {{ template.template }}</span><br>
                         
                     {% endfor %}
                     
@@ -332,7 +332,7 @@
             <!-- Step 13-->
             <div class="step">
                 <input type="checkbox" name="isGlobal" id="" />
-                <span class="block text-white">Want to show it global ?</span>
+                <span class="text-white">Want to show it global ?</span>
             </div>
 
             <br />
